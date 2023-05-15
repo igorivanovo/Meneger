@@ -4,18 +4,19 @@ import java.util.*;
 
 public class Todos {
     private Deque<String> stack = new ArrayDeque<>();
-    private ArrayList<String> task = new ArrayList<>();
+    private List<String> task = new ArrayList<>();
+    public static final int MAX_TASKS = 7;
 
     public Deque<String> getStack() {
         return stack;
     }
 
-    public ArrayList<String> getTask() {
+    public List<String> getTask() {
         return task;
     }
 
     public void addTask(String task) {
-        if (this.task.size() < 7) {
+        if (this.task.size() < MAX_TASKS) {
             this.task.add(task);
             this.stack.offer("ADD " + task);
         }
@@ -39,12 +40,13 @@ public class Todos {
     }
 
     public String getAllTasks() {
-        String strings1 = "";
-        String[] strings = task.toArray(new String[0]);
-        Arrays.sort(strings);
-        for (String s : strings) {
-            strings1 = strings1 + " " + s;
+        StringBuilder stringBuilder = new StringBuilder();
+        String[] allTasks = task.toArray(new String[0]);
+        Arrays.sort(allTasks);
+        for (String task : allTasks) {
+            stringBuilder.append(" " + task);
         }
-        return strings1;
+        String allTask = stringBuilder.toString();
+        return allTask;
     }
 }
